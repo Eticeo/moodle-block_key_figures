@@ -1,0 +1,159 @@
+/**
+ * Key Figures Block Styles
+ * 
+ * This file contains all styles for the Key Figures block
+ */
+
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+
+:root,
+.theme-light {
+    /* Block border styles */
+    --blocborder_border: 1px solid #d1d1d6;
+    --blocborder_shadow: none;
+    --blocborderradius: 8px;
+
+    /* Block title styles */
+    --bloctitlecolor: #3f3f46;
+    --bloctitlestyle_size: 1rem;
+    --bloctitlestyle_lh: 135%;
+    --bloctitlebold: normal;
+
+    /* Title styles */
+    --titre_s_size: 1.5rem;
+    --titre_s_lh: 140%;
+    --titre_s_ff: Geist;
+    --texte_sb: bolder;
+
+    /* Text styles */
+    --texte_m_size: 1rem;
+    --texte_m_lh: 150%;
+    --texte_m_ff: Geist;
+    --texte_reg: normal;
+}
+
+/* Dark theme overrides */
+.theme-dark {
+    --blocborder_border: 1px solid #51525c;
+}
+
+/* ==========================================================================
+   General Layout
+   ========================================================================== */
+
+.block.block_key_figures .block_key_figures_container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Title Section
+   ========================================================================== */
+
+.block.block_key_figures .block_key_figures_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.block_key_figures .block_key_figures_title h2,
+.block_key_figures .block_key_figures_title span {
+    color: var(--bloctitlecolor);
+    font-size: var(--bloctitlestyle_size);
+    line-height: var(--bloctitlestyle_lh);
+    font-weight: var(--bloctitlebold);
+}
+
+/* ==========================================================================
+   Sub-blocks
+   ========================================================================== */
+
+.block.block_key_figures .sub_block_key_figures {
+    text-align: center;
+    width: 400px;
+    padding: 30px;
+    margin-bottom: 30px;
+    word-break: break-word;
+    min-width: min(100%, 200px);
+}
+
+/* Border styles for sub-blocks */
+.block_key_figures .block_key_figures_container.border_display .sub_block_key_figures {
+    border: var(--blocborder_border);
+    box-shadow: var(--blocborder_shadow);
+    border-radius: var(--blocborderradius);
+}
+
+/* Number styles */
+.block.block_key_figures .sub_block_key_figures .row-numbers {
+    word-break: break-word;
+}
+
+.block.block_key_figures .sub_block_key_figures .row-numbers .col-number,
+.block.block_key_figures .sub_block_key_figures .row-numbers .col-number-caption {
+    text-align: left;
+}
+
+.block.block_key_figures .sub_block_key_figures .row-numbers .col-number {
+    padding: 16px;
+    font-size: var(--titre_s_size);
+    line-height: var(--titre_s_lh);
+    font-family: var(--titre_s_ff);
+    font-weight: var(--texte_sb);
+}
+
+/* Caption styles */
+.block_key_figures .col-number-caption,
+.block_key_figures .block_key_figures_title p {
+    font-size: var(--texte_m_size);
+    line-height: var(--texte_m_lh);
+    font-family: var(--texte_m_ff);
+    font-weight: var(--texte_reg);
+}
+
+/* Icon styles */
+.block.block_key_figures .sub_block_key_figures i {
+    font-size: 2.5rem;
+}
+
+/* ==========================================================================
+   Column Layout
+   ========================================================================== */
+
+.block.block_key_figures .sub_block_key_figures .col.row-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.block.block_key_figures .sub_block_key_figures .row-numbers .col-number-caption {
+    word-break: normal;
+}
+
+/* Column width classes */
+.block.block_key_figures .sub_block_key_figures.col-3 {
+    flex: 0 0 23%;
+}
+
+.block.block_key_figures .sub_block_key_figures.col-4 {
+    flex: 0 0 32%;
+}
+
+.block.block_key_figures .sub_block_key_figures.col-6 {
+    flex: 0 0 48%;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 767.98px) {
+    .block.block_key_figures .sub_block_key_figures {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
