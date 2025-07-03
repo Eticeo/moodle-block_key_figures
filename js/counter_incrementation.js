@@ -28,10 +28,10 @@
 /**
  * Initialize counter animations when DOM is loaded
  */
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     document
         .querySelectorAll(".block_key_figures.block .col-number")
-        .forEach(function (element) {
+        .forEach(function(element) {
             const finalresult = element.innerHTML;
             let newresult = finalresult;
 
@@ -43,12 +43,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let index = null;
             if (matchesnum) {
-                matchesnum.forEach(function (match, num) {
+                matchesnum.forEach(function(match, num) {
                     const regexnum = new RegExp(match, "g");
                     index = "##regex" + num + "##";
                     newresult = newresult.replace(regexnum, index);
                     allregexnums[index] = parseInt(match, 10);
-                    allregexsteps[index] = block_key_figures_get_step(
+                    allregexsteps[index] = blockKeyFiguresGetStep(
                         parseInt(match, 10)
                     );
                 });
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Start animation if numbers were found
             if (index !== null) {
-                block_key_figures_increment(
+                blockKeyFiguresIncrement(
                     numberblockid,
                     0,
                     allregexnums,
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * @param {number} number The target number to reach
  * @returns {number} The step size for the animation
  */
-function block_key_figures_get_step(number) {
+function blockKeyFiguresGetStep(number) {
     const step = Math.floor(number / 100);
     return step > 0 ? step : 1;
 }
@@ -89,7 +89,7 @@ function block_key_figures_get_step(number) {
  * @param {string} finalresult The final text to display
  * @param {string} newresult The intermediate text with placeholders
  */
-function block_key_figures_increment(
+function blockKeyFiguresIncrement(
     numberblockid,
     num,
     allregexnums,
@@ -122,8 +122,8 @@ function block_key_figures_increment(
 
     // Continue animation if not finished
     if (!isfinalresult) {
-        setTimeout(function () {
-            block_key_figures_increment(
+        setTimeout(function() {
+            blockKeyFiguresIncrement(
                 numberblockid,
                 num,
                 allregexnums,

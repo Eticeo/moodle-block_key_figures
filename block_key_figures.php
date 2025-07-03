@@ -23,7 +23,6 @@
  * @author     2025 Feb Belgrand Laureen <laureen.belgrand@eticeo.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 define('BLOCK_KEY_FIGURES', 'block_key_figures');
 
 /**
@@ -37,15 +36,14 @@ define('BLOCK_KEY_FIGURES', 'block_key_figures');
  * @author     2025 Feb Belgrand Laureen <laureen.belgrand@eticeo.fr>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_key_figures extends block_base
-{
+class block_key_figures extends block_base {
+
     /**
      * Initialize the block
      *
      * @return void
      */
-    function init(): void
-    {
+    public function init(): void {
         $this->title = get_string('pluginname', BLOCK_KEY_FIGURES);
     }
 
@@ -54,8 +52,7 @@ class block_key_figures extends block_base
      *
      * @return array
      */
-    function applicable_formats(): array
-    {
+    public function applicable_formats(): array {
         return ['all' => true];
     }
 
@@ -64,8 +61,7 @@ class block_key_figures extends block_base
      *
      * @return bool
      */
-    function hide_header(): bool
-    {
+    public function hide_header(): bool {
         return true;
     }
 
@@ -74,8 +70,7 @@ class block_key_figures extends block_base
      *
      * @return bool
      */
-    function instance_allow_multiple(): bool
-    {
+    public function instance_allow_multiple(): bool {
         return true;
     }
 
@@ -84,8 +79,7 @@ class block_key_figures extends block_base
      *
      * @return bool
      */
-    public function has_config(): bool
-    {
+    public function has_config(): bool {
         return true;
     }
 
@@ -94,12 +88,11 @@ class block_key_figures extends block_base
      *
      * @return array
      */
-    public function html_attributes(): array
-    {
+    public function html_attributes(): array {
         $attributes = [
             'id' => 'inst' . $this->instance->id,
             'class' => 'block_' . $this->name() . ' block ' . $this->bootstrap_size(),
-            'role' => $this->get_aria_role()
+            'role' => $this->get_aria_role(),
         ];
 
         if ($this->hide_header()) {
@@ -118,16 +111,15 @@ class block_key_figures extends block_base
      *
      * @return stdClass|null
      */
-    public function get_content(): stdClass|null
-    {
+    public function get_content(): stdClass|null {
         if ($this->content !== null) {
             return $this->content;
         }
 
-        // Set block title
+        // Set block title.
         $this->title = !empty($this->config->title) ? $this->config->title : get_string('config_title', BLOCK_KEY_FIGURES);
 
-        // Initialize content
+        // Initialize content.
         $this->content = new stdClass();
         $this->content->text = $this->get_blocks_content();
 
@@ -143,8 +135,7 @@ class block_key_figures extends block_base
      *
      * @return string
      */
-    public function bootstrap_size(): string
-    {
+    public function bootstrap_size(): string {
         $space = !empty($this->config->space) ? $this->config->space : 12;
         return "col-{$space} col-md-{$space} col-sm-12";
     }
@@ -154,18 +145,17 @@ class block_key_figures extends block_base
      *
      * @return string
      */
-    public function get_blocks_content(): string
-    {
-        // Initialize content with styles
+    public function get_blocks_content(): string {
+        // Initialize content with styles.
         $content = $this->generate_styles();
 
-        // Add border class if enabled
+        // Add border class if enabled.
         $tilesborder = !empty($this->config->tile_border) ? 'border_display' : '';
 
-        // Generate title section
+        // Generate title section.
         $content .= $this->generate_title_section();
 
-        // Generate blocks container
+        // Generate blocks container.
         $content .= '<div class="block_key_figures_container ' . $tilesborder . '">';
         $content .= $this->generate_blocks();
         $content .= '</div>';
@@ -178,8 +168,7 @@ class block_key_figures extends block_base
      *
      * @return string
      */
-    private function generate_styles(): string
-    {
+    private function generate_styles(): string {
         $instanceid = '#inst' . $this->instance->id;
         $styles = '';
 
@@ -191,7 +180,7 @@ class block_key_figures extends block_base
             'tile_background_color' => [".sub_block_key_figures", "background-color"],
             'icon_color' => [".sub_block_key_figures .block_title", "color"],
             'number_color' => [".sub_block_key_figures .row-numbers .col-number", "color"],
-            'caption_color' => [".sub_block_key_figures .row-numbers .col-number-caption", "color"]
+            'caption_color' => [".sub_block_key_figures .row-numbers .col-number-caption", "color"],
         ];
 
         foreach ($colors as $configkey => [$selector, $property]) {
@@ -212,8 +201,7 @@ class block_key_figures extends block_base
      *
      * @return string
      */
-    private function generate_title_section(): string
-    {
+    private function generate_title_section(): string {
         $content = '<div class="block_key_figures_title">
                     <h2>' . $this->config->title . '</h2>
                     <span>' . $this->config->subtitle . '</span>';
@@ -231,8 +219,7 @@ class block_key_figures extends block_base
      *
      * @return string
      */
-    private function generate_blocks(): string
-    {
+    private function generate_blocks(): string {
         $content = '';
         $blocksnumber = !empty($this->config->block_number) ? (int) $this->config->block_number : 0;
         $col = $this->get_column_class($blocksnumber);
@@ -251,9 +238,8 @@ class block_key_figures extends block_base
      * @param int $blocksnumber Number of blocks
      * @return string
      */
-    private function get_column_class(int $blocksnumber): string
-    {
-        $columnMap = [
+    private function get_column_class(int $blocksnumber): string {
+        $columnmap = [
             1 => "col-12",
             2 => "col-6",
             3 => "col-4",
@@ -265,10 +251,10 @@ class block_key_figures extends block_base
             9 => "col-4",
             10 => "col-3",
             11 => "col-3",
-            12 => "col-3"
+            12 => "col-3",
         ];
 
-        return $columnMap[$blocksnumber] ?? "col-12";
+        return $columnmap[$blocksnumber] ?? "col-12";
     }
 
     /**
@@ -279,16 +265,15 @@ class block_key_figures extends block_base
      * @param string $flexdirection Flex direction
      * @return string
      */
-    private function generate_single_block(int $blocknum, string $col, string $flexdirection): string
-    {
+    private function generate_single_block(int $blocknum, string $col, string $flexdirection): string {
         $content = '<div class="sub_block_key_figures ' . $col . '">';
 
-        // Add icon if exists
+        // Add icon if exists.
         if (!empty($this->config->icon[$blocknum])) {
             $content .= '<div class="block_title"><i class="' . $this->config->icon[$blocknum] . '"></i></div>';
         }
 
-        // Generate numbers section
+        // Generate numbers section.
         $content .= $this->generate_numbers_section($blocknum, $flexdirection);
 
         $content .= '</div>';
@@ -302,8 +287,7 @@ class block_key_figures extends block_base
      * @param string $flexdirection Flex direction
      * @return string
      */
-    private function generate_numbers_section(int $blocknum, string $flexdirection): string
-    {
+    private function generate_numbers_section(int $blocknum, string $flexdirection): string {
         $content = $flexdirection == "column" ? '<div class="row">' : '<table>';
         $linesnumber = $this->config->line_number[$blocknum] ?? 0;
 
@@ -328,8 +312,7 @@ class block_key_figures extends block_base
      * @param string $flexdirection Flex direction
      * @return string
      */
-    private function generate_number_row(string $number, string $numbercaption, string $idcolnumber, string $flexdirection): string
-    {
+    private function generate_number_row(string $number, string $numbercaption, string $idcolnumber, string $flexdirection): string {
         if ($flexdirection == "column") {
             return '<div class="col row-numbers">
                         <div class="col-number" id="' . $idcolnumber . '">' . $number . '</div>
@@ -353,8 +336,7 @@ class block_key_figures extends block_base
      * @param renderer_base $output the output format
      * @return stdClass
      */
-    public function get_content_for_external($output): stdClass
-    {
+    public function get_content_for_external($output): stdClass {
         global $CFG;
         require_once($CFG->libdir . '/externallib.php');
 
@@ -404,8 +386,7 @@ class block_key_figures extends block_base
      * @param boolean $nolongerused not used
      * @return void
      */
-    function instance_config_save($data, $nolongerused = false): void
-    {
+    public function instance_config_save($data, $nolongerused = false): void {
         $config = clone ($data);
 
         if (isset($config->sub_text) && isset($config->sub_text['text']) && $config->sub_text['text'] != '') {
@@ -423,7 +404,7 @@ class block_key_figures extends block_base
                 'block_key_figures',
                 'content',
                 $itemid,
-                array('subdirs' => true),
+                ['subdirs' => true],
                 $blocktext['text']
             );
 
@@ -436,7 +417,7 @@ class block_key_figures extends block_base
                 $itemid
             );
 
-            // Move embedded files into a proper filearea and adjust HTML links to match
+            // Move embedded files into a proper filearea and adjust HTML links to match.
             $config->sub_text['text'] = $file;
         }
 
@@ -448,8 +429,7 @@ class block_key_figures extends block_base
      *
      * @return bool
      */
-    function instance_delete(): bool
-    {
+    public function instance_delete(): bool {
         $fs = get_file_storage();
         $fs->delete_area_files($this->context->id, 'block_key_figures');
         return true;
@@ -461,22 +441,21 @@ class block_key_figures extends block_base
      * @param int $fromid the id number of the block instance to copy from
      * @return boolean
      */
-    public function instance_copy($fromid): bool
-    {
+    public function instance_copy($fromid): bool {
         $fromcontext = context_block::instance($fromid);
         $fs = get_file_storage();
 
         // This extra check if file area is empty adds one query if it is not empty but saves several if it is.
         if (!$fs->is_area_empty($fromcontext->id, 'block_key_figures', 'content', 0, false)) {
             $draftitemid = 0;
-            file_prepare_draft_area($draftitemid, $fromcontext->id, 'block_key_figures', 'content', 0, array('subdirs' => true));
+            file_prepare_draft_area($draftitemid, $fromcontext->id, 'block_key_figures', 'content', 0, ['subdirs' => true]);
             file_save_draft_area_files(
                 $draftitemid,
                 $this->context->id,
                 'block_key_figures',
                 'content',
                 0,
-                array('subdirs' => true)
+                ['subdirs' => true]
             );
         }
         return true;
@@ -487,8 +466,7 @@ class block_key_figures extends block_base
      *
      * @return stdClass the configs for both the block instance and plugin
      */
-    public function get_config_for_external(): object
-    {
+    public function get_config_for_external(): object {
         global $CFG;
 
         // Return all settings for all users since it is safe (no private keys, etc..).

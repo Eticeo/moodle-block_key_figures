@@ -1,68 +1,81 @@
 /**
  * Function call in php
  *
- * @param instid int : id of block instance
- * @param waitModal bool : true if we need to wait modal to call js. False if not (ex: load param is tab)
+ * @param {number} instid - id of block instance
+ * @param {boolean} waitModal - true if we need to wait modal to call js. False if not (ex: load param is tab)
  */
 export const init = (instid, waitModal) => {
     // Lines to give window functions needed.
-    window.block_key_figures_manage_lines = block_key_figures_manage_lines;
-    window.block_key_figures_change_line = block_key_figures_change_line;
+    window.blockKeyFiguresManageLines = blockKeyFiguresManageLines;
+    window.blockKeyFiguresChangeLine = blockKeyFiguresChangeLine;
 
     if (waitModal) {
         // Call specific function.
-        block_key_figures_waitmodal(instid);
+        blockKeyFiguresWaitModal(instid);
     } else {
         // Go on.
-        block_key_figures_on_open();
+        blockKeyFiguresOnOpen();
     }
 };
 
 /**
  * Waits for the modal to be opened and then runs the init function
  *
- * @param instid int : id of block instance
+ * @param {number} instid - id of block instance
+ * @returns {Promise<boolean>} - true if the modal is opened, false if not
  */
-function block_key_figures_waitmodal(instid) {
+function blockKeyFiguresWaitModal(instid) {
     // We need to wait specific element (which is in modal) to run init.
-    block_key_figures_waitForElm("input[name='blockid'][value='" + instid + "']").then((elm) => {
+    blockKeyFiguresWaitForElm("input[name='blockid'][value='" + instid + "']").then(() => {
         // Element is here, run init.
-        block_key_figures_on_open();
-
+        blockKeyFiguresOnOpen();
         // And now wait modal closed to rerun the waitmodal.
-        block_key_figures_waitdestroymodal(instid);
+        blockKeyFiguresWaitDestroyModal(instid);
+
+        return true;
+
+    }).catch(error => {
+        console.error(error);
+        return false;
     });
 }
 
 /**
  * Needed in case we open, close then reopen modal
  *
- * @param instid int : id of block instance
+ * @param {number} instid - id of block instance
+ * @returns {Promise<boolean>} - true if the modal is destroyed, false if not
  */
-function block_key_figures_waitdestroymodal(instid) {
-    block_key_figures_waitForNotElm("input[name='blockid'][value='" + instid + "']").then((elm) => {
-        block_key_figures_on_open();
-        block_key_figures_waitmodal(instid);
+function blockKeyFiguresWaitDestroyModal(instid) {
+    blockKeyFiguresWaitForNotElm("input[name='blockid'][value='" + instid + "']").then(() => {
+        blockKeyFiguresOnOpen();
+        blockKeyFiguresWaitModal(instid);
+
+        return true;
+
+    }).catch(error => {
+        console.error(error);
+        return false;
     });
 }
 
 /**
  * Function to run when the modal is opened
  */
-function block_key_figures_on_open() {
+function blockKeyFiguresOnOpen() {
     document.querySelectorAll('[id^="id_config_block_number"]').forEach(function(element) {
-        block_key_figures_manage_lines(element, 'id_configheader');
+        blockKeyFiguresManageLines(element, 'id_configheader');
 
         element.addEventListener('change', function() {
-            block_key_figures_manage_lines(element, 'id_configheader');
+            blockKeyFiguresManageLines(element, 'id_configheader');
         });
     });
 
     document.querySelectorAll('[id^="id_config_line_number_"]').forEach(function(element) {
-        block_key_figures_change_line(element);
+        blockKeyFiguresChangeLine(element);
 
         element.addEventListener('change', function() {
-            block_key_figures_change_line(element);
+            blockKeyFiguresChangeLine(element);
         });
     });
 }
@@ -70,16 +83,16 @@ function block_key_figures_on_open() {
 /**
  * Function wait specific element are NOT here to continue
  *
- * @param selector string: the specific element selector
+ * @param {string} selector - the specific element selector
  * @returns {Promise}
  */
-function block_key_figures_waitForNotElm(selector) {
+function blockKeyFiguresWaitForNotElm(selector) {
     return new Promise(resolve => {
         if (!document.querySelector(selector)) {
             return resolve(document.querySelector(selector));
         }
 
-        const observer = new MutationObserver(mutations => {
+        const observer = new MutationObserver(() => {
             if (!document.querySelector(selector)) {
                 resolve(document.querySelector(selector));
                 observer.disconnect();
@@ -91,21 +104,23 @@ function block_key_figures_waitForNotElm(selector) {
             subtree: true
         });
     });
+
+    return false;
 }
 
 /**
  * Function wait specific element are here to continue
  *
- * @param selector string: the specific element selector
+ * @param {string} selector - the specific element selector
  * @returns {Promise}
  */
-function block_key_figures_waitForElm(selector) {
+function blockKeyFiguresWaitForElm(selector) {
     return new Promise(resolve => {
         if (document.querySelector(selector)) {
             return resolve(document.querySelector(selector));
         }
 
-        const observer = new MutationObserver(mutations => {
+        const observer = new MutationObserver(() => {
             if (document.querySelector(selector)) {
                 resolve(document.querySelector(selector));
                 observer.disconnect();
@@ -117,20 +132,22 @@ function block_key_figures_waitForElm(selector) {
             subtree: true
         });
     });
+
+    return false;
 }
 
 /**
  * Check the current number of block and hide the blocks settings that we don't need,
  * and show that we need
  *
- * @param selectSelector    | string or object, selector of the number of line to show
- * @param targetId          | string id of the lines to show/hide
+ * @param {string} element - element to manage
+ * @param {string} targetid - id of the lines to show/hide
  */
-function block_key_figures_manage_lines(element, targetId) {
-    var blockNumber = parseInt(element.value);
+function blockKeyFiguresManageLines(element, targetid) {
+    let blockNumber = parseInt(element.value);
 
-    document.querySelectorAll('[id^="' + targetId + '"]').forEach(function(element) {
-        let match = element.id.match(new RegExp(targetId + "(\\d+)_"));
+    document.querySelectorAll('[id^="' + targetid + '"]').forEach(function(element) {
+        let match = element.id.match(new RegExp(targetid + "(\\d+)_"));
         if (match) {
             let num = parseInt(match[1]);
             if (num > blockNumber) {
@@ -145,12 +162,12 @@ function block_key_figures_manage_lines(element, targetId) {
 /**
  * Function to manage the lines of the block key figures
  *
- * @param object   | object
+ * @param {object} object - object
  */
-function block_key_figures_change_line(object) {
-    var blockNum = object.id;
-    blockNum = parseInt(blockNum.replace('id_config_line_number_', ''));
+function blockKeyFiguresChangeLine(object) {
+    let blocknum = object.id;
+    blocknum = parseInt(blocknum.replace('id_config_line_number_', ''));
 
-    block_key_figures_manage_lines(object, 'fitem_id_config_number_' + blockNum + '_');
-    block_key_figures_manage_lines(object, 'fitem_id_config_number_caption_' + blockNum + '_');
+    blockKeyFiguresManageLines(object, 'fitem_id_config_number_' + blocknum + '_');
+    blockKeyFiguresManageLines(object, 'fitem_id_config_number_caption_' + blocknum + '_');
 }

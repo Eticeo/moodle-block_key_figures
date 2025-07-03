@@ -1,6 +1,6 @@
 /**
  * Key Figures Block Styles
- * 
+ *
  * This file contains all styles for the Key Figures block
  */
 
@@ -78,7 +78,8 @@
     padding: 30px;
     margin-bottom: 30px;
     word-break: break-word;
-    min-width: min(100%, 200px);
+    min-width: 200px;
+    max-width: 100%;
 }
 
 /* Border styles for sub-blocks */

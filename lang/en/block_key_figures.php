@@ -24,40 +24,32 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Key figures';
-
-// Capabilities
+$string['config_sub_text'] = 'Block text, to display under the titles';
+$string['config_subtitle'] = 'Check the latest important figures';
+$string['config_subtitle_desc'] = 'Block subtitle';
+$string['config_title'] = 'Key figures';
+$string['config_title_desc'] = 'Block title';
 $string['key_figures:addinstance'] = 'Add a new key figures block';
+$string['pluginname'] = 'Key figures';
 $string['key_figures:myaddinstance'] = 'Add a new key figures block to my dashboard';
 
-// General configuration
-$string['config_title_desc'] = 'Block title';
-$string['config_title'] = 'Key figures';
-$string['config_subtitle_desc'] = 'Block subtitle';
-$string['config_subtitle'] = 'Check the latest important figures';
-$string['config_sub_text'] = 'Block text, to display under the titles';
+$string['config_background_color_desc'] = 'Background color';
+$string['config_sub_text_font_color_desc'] = 'Text color';
+$string['config_subtitle_font_color_desc'] = 'Subtitle color';
+$string['config_title_font_color_desc'] = 'Title color';
 $string['configspace_desc'] = "Block width.
 For exemple 12 will be the full width and 1 a twelfth of the screen size.";
-
-// Style
-$string['config_title_font_color_desc'] = 'Title color';
-$string['config_subtitle_font_color_desc'] = 'Subtitle color';
-$string['config_sub_text_font_color_desc'] = 'Text color';
-$string['config_background_color_desc'] = 'Background color';
-$string['config_tile_background_color_desc'] = 'Tile background color';
 $string['config_icon_color_desc'] = 'Icon color';
-$string['config_number_color_desc'] = 'Number color';
+$string['config_tile_background_color_desc'] = 'Tile background color';
 $string['config_caption_color_desc'] = 'Caption color';
-$string['config_tile_border'] = 'Display tile border?';
-
-// Blocks
+$string['config_number_color_desc'] = 'Number color';
 $string['config_block_number_desc'] = 'Block number';
-
+$string['config_tile_border'] = 'Display tile border?';
 $string['config_block_settings'] = 'Block number {$a}';
-$string['config_icon_desc'] = 'Block icon';
-$string['config_flex_direction_desc'] = 'Content display direction (number and caption)';
 $string['config_column'] = 'Column';
-$string['config_row'] = 'Row';
+$string['config_flex_direction_desc'] = 'Content display direction (number and caption)';
+$string['config_icon_desc'] = 'Block icon';
 $string['config_line_number_desc'] = 'Number of rows';
-$string['config_number_desc'] = 'Number to display at row {$a}';
+$string['config_row'] = 'Row';
 $string['config_number_caption_desc'] = 'Caption to display at row {$a}';
+$string['config_number_desc'] = 'Number to display at row {$a}';
