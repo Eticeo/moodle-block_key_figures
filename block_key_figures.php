@@ -380,6 +380,32 @@ class block_key_figures extends block_base {
     }
 
     /**
+     * Check if the content is trusted
+     *
+     * @return bool
+     */
+    function content_is_trusted() {
+        global $SCRIPT;
+
+        if (!$context = context::instance_by_id($this->instance->parentcontextid, IGNORE_MISSING)) {
+            return false;
+        }
+        // Find out if this block is on the profile page.
+        if ($context->contextlevel == CONTEXT_USER) {
+            if ($SCRIPT === '/my/index.php') {
+                // This is exception - page is completely private, nobody else may see content there.
+                // That is why we allow JS here.
+                return true;
+            } else {
+                // No JS on public personal pages, it would be a big security issue.
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Serialize and store config data.
      *
      * @param stdClass $data the data to store
