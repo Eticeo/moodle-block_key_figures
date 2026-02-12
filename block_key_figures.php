@@ -116,6 +116,8 @@ class block_key_figures extends block_base {
             return $this->content;
         }
 
+        $this->content = new stdClass();
+
         // Use renderer to generate content.
         $renderable = new \block_key_figures\output\block_content($this->config, $this->instance->id);
         $renderer = $this->page->get_renderer('block_key_figures');
