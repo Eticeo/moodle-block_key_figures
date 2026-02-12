@@ -35,7 +35,6 @@ function blockKeyFiguresWaitModal(instid) {
         return true;
 
     }).catch(error => {
-        console.error(error);
         return false;
     });
 }
@@ -54,7 +53,6 @@ function blockKeyFiguresWaitDestroyModal(instid) {
         return true;
 
     }).catch(error => {
-        console.error(error);
         return false;
     });
 }

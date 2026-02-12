@@ -38,8 +38,7 @@
  * @param array $options Additional options
  * @return void
  */
-function block_key_figures_pluginfile(mixed $course, mixed $birecordorcm, mixed $context, mixed $filearea, mixed $args,
-        mixed $forcedownload, array $options = []): void {
+function block_key_figures_pluginfile(mixed $course, mixed $birecordorcm, mixed $context, mixed $filearea, mixed $args, mixed $forcedownload, array $options = []): void {
     global $DB, $CFG;
 
     // Extract item ID from arguments.

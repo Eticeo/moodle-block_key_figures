@@ -55,8 +55,7 @@ class block_key_figures_edit_form extends block_edit_form {
 
         // Text to display under the block.
         $filepickeroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES];
-        $mform->addElement('editor', 'config_sub_text',
-                get_string('config_sub_text', 'block_key_figures'), null, $filepickeroptions);
+        $mform->addElement('editor', 'config_sub_text', get_string('config_sub_text', 'block_key_figures'), null, $filepickeroptions);
         $mform->setType('config_sub_text', PARAM_RAW);
 
         // Block width on the page (1 to 12).
@@ -73,15 +72,13 @@ class block_key_figures_edit_form extends block_edit_form {
 
         // Subtitle color.
         $color = '';
-        $mform->addElement('text', 'config_subtitle_font_color',
-                get_string('config_subtitle_font_color_desc', 'block_key_figures'));
+        $mform->addElement('text', 'config_subtitle_font_color', get_string('config_subtitle_font_color_desc', 'block_key_figures'));
         $mform->setDefault('config_subtitle_font_color', $color);
         $mform->setType('config_subtitle_font_color', PARAM_TEXT);
 
         // Subtext color.
         $color = '';
-        $mform->addElement('text', 'config_sub_text_font_color',
-                get_string('config_sub_text_font_color_desc', 'block_key_figures'));
+        $mform->addElement('text', 'config_sub_text_font_color', get_string('config_sub_text_font_color_desc', 'block_key_figures'));
         $mform->setDefault('config_sub_text_font_color', $color);
         $mform->setType('config_sub_text_font_color', PARAM_TEXT);
 
@@ -93,8 +90,7 @@ class block_key_figures_edit_form extends block_edit_form {
 
         // Tiles background color.
         $color = '';
-        $mform->addElement('text', 'config_tile_background_color',
-                get_string('config_tile_background_color_desc', 'block_key_figures'));
+        $mform->addElement('text', 'config_tile_background_color', get_string('config_tile_background_color_desc', 'block_key_figures'));
         $mform->setDefault('config_tile_background_color', $color);
         $mform->setType('config_tile_background_color', PARAM_TEXT);
 
@@ -121,8 +117,7 @@ class block_key_figures_edit_form extends block_edit_form {
         $mform->setDefault('config_tile_border', 1);
 
         // We add a select for choose the number of blocks to display (max 12).
-        $mform->addElement('select', 'config_block_number', get_string('config_block_number_desc', 'block_key_figures'),
-                $options);
+        $mform->addElement('select', 'config_block_number', get_string('config_block_number_desc', 'block_key_figures'), $options);
         $mform->setDefault('config_block_number', 2);
         $mform->setType('config_block_number', PARAM_INT);
 
@@ -130,38 +125,32 @@ class block_key_figures_edit_form extends block_edit_form {
          *       TILES PARAMS
          ****************************/
 
-        $optionsflexdirection = ['row' => get_string('config_row', 'block_key_figures'),
-                'column' => get_string('config_column', 'block_key_figures')];
+        $optionsflexdirection = ['row' => get_string('config_row', 'block_key_figures'), 'column' => get_string('config_column', 'block_key_figures')];
 
         // For each block.
         foreach ($options as $blocknum) {
-            $mform->addElement('header', 'configheader' . $blocknum,
-                    get_string('config_block_settings', 'block_key_figures', $blocknum));
+            $mform->addElement('header', 'configheader' . $blocknum, get_string('config_block_settings', 'block_key_figures', $blocknum));
 
             // Icon of the block (html class).
             $mform->addElement('text', 'config_icon[' . $blocknum . ']', get_string('config_icon_desc', 'block_key_figures'));
             $mform->setType('config_icon[' . $blocknum . ']', PARAM_TEXT);
 
             // Block direction (row or column).
-            $mform->addElement('select', 'config_flex_direction[' . $blocknum . ']',
-                    get_string('config_flex_direction_desc', 'block_key_figures'), $optionsflexdirection);
+            $mform->addElement('select', 'config_flex_direction[' . $blocknum . ']', get_string('config_flex_direction_desc', 'block_key_figures'), $optionsflexdirection);
             $mform->setType('config_flex_direction[' . $blocknum . ']', PARAM_TEXT);
 
             // Number of lines in the block.
-            $mform->addElement('select', 'config_line_number[' . $blocknum . ']',
-                    get_string('config_line_number_desc', 'block_key_figures'), $options);
+            $mform->addElement('select', 'config_line_number[' . $blocknum . ']', get_string('config_line_number_desc', 'block_key_figures'), $options);
             $mform->setType('config_line_number[' . $blocknum . ']', PARAM_INT);
 
             // For each line.
             foreach ($options as $linenum) {
                 // Number to display.
-                $mform->addElement('text', 'config_number[' . $blocknum . '][' . $linenum . ']',
-                        get_string('config_number_desc', 'block_key_figures', $linenum));
+                $mform->addElement('text', 'config_number[' . $blocknum . '][' . $linenum . ']', get_string('config_number_desc', 'block_key_figures', $linenum));
                 $mform->setType('config_number[' . $blocknum . '][' . $linenum . ']', PARAM_TEXT);
 
                 // Caption to display.
-                $mform->addElement('text', 'config_number_caption[' . $blocknum . '][' . $linenum . ']',
-                        get_string('config_number_caption_desc', 'block_key_figures', $linenum));
+                $mform->addElement('text', 'config_number_caption[' . $blocknum . '][' . $linenum . ']', get_string('config_number_caption_desc', 'block_key_figures', $linenum));
                 $mform->setType('config_number_caption[' . $blocknum . '][' . $linenum . ']', PARAM_TEXT);
             }
         }

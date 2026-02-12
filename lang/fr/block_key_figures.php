@@ -37,7 +37,7 @@ $string['config_background_color_desc'] = 'Couleur de fond';
 $string['config_sub_text_font_color_desc'] = 'Couleur du texte';
 $string['config_subtitle_font_color_desc'] = 'Couleur du sous titre';
 $string['config_title_font_color_desc'] = 'Couleur du titre';
-$string['configspace_desc'] = "Largeur du bloc. 
+$string['configspace_desc'] = "Largeur du bloc.
 Par exemple 12 sera toute la largeur et 1 un douzième de la taille de l'écran.";
 $string['config_icon_color_desc'] = 'Couleur des icônes';
 $string['config_tile_background_color_desc'] = 'Couleur de fond des tuiles';
