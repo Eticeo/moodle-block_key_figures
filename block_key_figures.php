@@ -121,7 +121,7 @@ class block_key_figures extends block_base {
         $renderer = $this->page->get_renderer('block_key_figures');
         $this->content->text = $renderer->render_block_content($renderable);
 
-        // Load required JavaScript modules
+        // Load required JavaScript modules.
         $this->page->requires->js_call_amd('block_key_figures/counter', 'init');
         $this->page->requires->js_call_amd('block_key_figures/editform', 'init', [$this->instance->id, true]);
 
@@ -152,7 +152,7 @@ class block_key_figures extends block_base {
         global $CFG;
         require_once($CFG->libdir . '/externallib.php');
 
-        $content = new stdClass;
+        $content = new stdClass();
         $content->title = null;
         $content->content = '';
         $content->contentformat = FORMAT_MOODLE;
@@ -164,7 +164,7 @@ class block_key_figures extends block_base {
         }
 
         if (isset($this->config->sub_text)) {
-            $filteropt = new stdClass;
+            $filteropt = new stdClass();
             if ($this->content_is_trusted()) {
                 // Fancy html allowed only on course, category and system blocks.
                 $filteropt->noclean = true;
@@ -175,7 +175,7 @@ class block_key_figures extends block_base {
             if (isset($this->config->format)) {
                 $format = $this->config->format;
             }
-            list($content->content, $content->contentformat) =
+            [$content->content, $content->contentformat] =
                 external_format_text(
                     $this->config->sub_text,
                     $format,
@@ -196,7 +196,7 @@ class block_key_figures extends block_base {
      *
      * @return bool
      */
-    function content_is_trusted() {
+    public function content_is_trusted(): bool {
         global $SCRIPT;
 
         if (!$context = context::instance_by_id($this->instance->parentcontextid, IGNORE_MISSING)) {

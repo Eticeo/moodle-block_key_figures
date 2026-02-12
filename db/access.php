@@ -31,9 +31,9 @@ $capabilities = [
     'block/key_figures:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        ),
+        ],
 
         'clonepermissionsfrom' => 'moodle/my:manageblocks',
     ],
@@ -43,10 +43,10 @@ $capabilities = [
 
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
-        ),
+        ],
 
         'clonepermissionsfrom' => 'moodle/site:manageblocks',
     ],

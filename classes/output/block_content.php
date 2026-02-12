@@ -244,4 +244,3 @@ class block_content implements renderable, templatable {
         return $columnmap[$blocksnumber] ?? "col-12";
     }
 }
-
