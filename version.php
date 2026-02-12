@@ -29,5 +29,5 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2026021200;
 $plugin->requires  = 2023042401;
-$plugin->release   = '1.0';
+$plugin->release   = '1.1';
 $plugin->component = 'block_key_figures';

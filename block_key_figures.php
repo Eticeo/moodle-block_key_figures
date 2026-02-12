@@ -116,19 +116,13 @@ class block_key_figures extends block_base {
             return $this->content;
         }
 
-        // Set block title.
-        $this->title = !empty($this->config->title) ? $this->config->title : get_string('config_title', BLOCK_KEY_FIGURES);
-
-        // Initialize content.
-        $this->content = new stdClass();
-
         // Use renderer to generate content.
         $renderable = new \block_key_figures\output\block_content($this->config, $this->instance->id);
         $renderer = $this->page->get_renderer('block_key_figures');
         $this->content->text = $renderer->render_block_content($renderable);
 
-        // Load required JavaScript
-        $this->page->requires->js('/blocks/key_figures/js/counter_incrementation.js', true);
+        // Load required JavaScript modules
+        $this->page->requires->js_call_amd('block_key_figures/counter', 'init');
         $this->page->requires->js_call_amd('block_key_figures/editform', 'init', [$this->instance->id, true]);
 
         return $this->content;
